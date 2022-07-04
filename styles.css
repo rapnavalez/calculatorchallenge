@@ -1,0 +1,357 @@
+html[data-theme='theme1'] {
+  --main-bg: hsl(222, 26%, 31%);
+  --main-bg-alt: hsl(223, 31%, 20%);
+  --screen-bg: hsl(224, 36%, 15%);
+  --key-bg-blue: hsl(225, 21%, 49%);
+  --key-bg-shadow-blue:hsl(224, 28%, 35%);
+  --key-bg-red: hsl(6, 63%, 50%);
+  --key-bg-shadow-red: hsl(6, 70%, 34%);
+  --key-bg-orange: hsl(30, 25%, 89%);
+  --key-bg-shadow-orange: hsl(28, 16%, 65%);
+  --text-white: #FFF;
+  --text-blue: hsl(221, 14%, 31%);
+}
+
+html[data-theme='theme2'] {
+  --main-bg: hsl(0, 0%, 90%);
+  --main-bg-alt: hsl(0, 5%, 81%);
+  --screen-bg: hsl(0, 0%, 93%);
+  --key-bg-blue: hsl(185, 42%, 37%);
+  --key-bg-shadow-blue: hsl(185, 58%, 25%);
+  --key-bg-red: hsl(25, 98%, 40%);
+  --key-bg-shadow-red: hsl(25, 99%, 27%);
+  --key-bg-orange: hsl(45, 7%, 89%);
+  --key-bg-shadow-orange: hsl(35, 11%, 61%);
+  --text-blue: hsl(60, 10%, 19%);
+  --text-white: #FFF;
+}
+
+html[data-theme='theme3'] {
+  --main-bg: hsl(268, 75%, 9%);
+  --main-bg-alt: hsl(268, 71%, 12%);
+  --screen-bg: hsl(268, 71%, 12%);
+  --key-bg-blue: hsl(281, 89%, 26%);
+  --key-bg-shadow-blue: hsl(285, 91%, 52%);
+  --key-bg-red: hsl(176, 100%, 44%);
+  --key-bg-shadow-red: hsl(177, 92%, 70%);
+  --key-bg-orange: hsl(268, 47%, 21%);
+  --key-bg-shadow-orange: hsl(290, 70%, 36%);
+  --text-blue: hsl(198, 20%, 13%);
+  --text-white: #FFF;
+  --text-yellow: hsl(52, 100%, 62%);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "League Spartan";
+}
+
+body {
+  font-size: 32px;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: var(--main-bg);
+}
+
+.container main {
+  width: 350px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+@media (max-width: 400px) {
+  .container main {
+    width: 300px;
+  }
+}
+
+.container main .top,
+.container main .screen,
+.container main .numberpad {
+  width: 100%;
+}
+
+.top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.top h3 {
+  font-size: .8em;
+  color: var(--text-white);
+}
+
+@media (max-width: 400px) {
+  .top h3 {
+    font-size: 1em;
+  }
+}
+
+.top .theme-selector {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 15px;
+}
+
+.top .theme-selector h5 {
+  color: var(--text-white);
+  font-size: .25em;
+  margin-bottom: .5em;
+}
+
+@media (max-width: 400px) {
+  .top .theme-selector h5 {
+    font-size: .4em;
+  }
+}
+
+.top .theme-selector .theme-selector-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: var(--main-bg-alt);
+  padding: .5px;
+  border-radius: 15px;
+}
+
+.top .theme-selector .theme-selector-wrapper .option-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 3px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+
+@media (max-width: 400px) {
+  .top .theme-selector .theme-selector-wrapper .option-wrapper {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.top .theme-selector .theme-selector-wrapper .option-wrapper .label {
+  font-size: .3em;
+  color: var(--text-white);
+  position: absolute;
+  top: -15px;
+}
+
+@media (max-width: 400px) {
+  .top .theme-selector .theme-selector-wrapper .option-wrapper .label {
+    font-size: .4em;
+    top: -20px;
+  }
+}
+
+.top .theme-selector .theme-selector-wrapper .option-wrapper input {
+  display: none;
+}
+
+.top .theme-selector .theme-selector-wrapper .option-wrapper input:checked + .checkmark {
+  opacity: 1;
+}
+
+.top .theme-selector .theme-selector-wrapper .option-wrapper .checkmark {
+  opacity: 0;
+  width: 95%;
+  height: 95%;
+  border-radius: 50%;
+  background: var(--key-bg-red);
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+.screen {
+  background-color: var(--screen-bg);
+  height: 90px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+}
+
+@media (max-width: 400px) {
+  .screen {
+    margin-top: 30px;
+    height: 100px;
+  }
+}
+
+.screen .firstInput {
+  position: absolute;
+  top: 7px;
+  right: 20px;
+  font-size: .5em;
+  font-weight: normal;
+  color: var(--text-white);
+}
+
+.screen--input {
+  width: 100%;
+  height: 100%;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-white);
+  background: none;
+  border: none;
+  outline: none;
+  text-align: end;
+  -webkit-appearance: none;
+          appearance: none;
+  -moz-appearance: textfield;
+}
+
+.screen input::-webkit-outer-spin-button,
+.screen input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.numberpad {
+  width: 100%;
+  height: 300px;
+  background: var(--main-bg-alt);
+  margin-top: 20px;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+@media (max-width: 400px) {
+  .numberpad {
+    height: 400px;
+  }
+}
+
+.numberpad .wrapper {
+  height: 100%;
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (70px)[4];
+      grid-template-columns: repeat(4, 70px);
+  gap: 10px;
+}
+
+@media (max-width: 400px) {
+  .numberpad .wrapper {
+    -ms-grid-columns: (58px)[4];
+        grid-template-columns: repeat(4, 58px);
+  }
+}
+
+.numberpad .wrapper .numberpad--btn {
+  background-color: var(--key-bg-orange);
+  border: none;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-orange);
+          box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-orange);
+  font-size: .8em;
+  font-weight: 700;
+  color: var(--text-blue);
+  cursor: pointer;
+}
+
+@media (max-width: 400px) {
+  .numberpad .wrapper .numberpad--btn {
+    font-size: 1.1em;
+  }
+}
+
+.numberpad .wrapper .numberpad--btn:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  -webkit-box-shadow: 0px 5px 0px -3px var(--key-bg-shadow-orange);
+          box-shadow: 0px 5px 0px -3px var(--key-bg-shadow-orange);
+}
+
+.numberpad .wrapper .numberpad--btn:disabled {
+  background-color: red;
+}
+
+.numberpad .wrapper .del, .numberpad .wrapper .reset, .numberpad .wrapper .equals {
+  font-size: .6em;
+  color: var(--text-white);
+  background-color: var(--key-bg-blue);
+  -webkit-box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-blue);
+          box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-blue);
+}
+
+.numberpad .wrapper .del:active, .numberpad .wrapper .reset:active, .numberpad .wrapper .equals:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  -webkit-box-shadow: 0px 5px 0px -3px var(--key-bg-shadow-blue);
+          box-shadow: 0px 5px 0px -3px var(--key-bg-shadow-blue);
+}
+
+.numberpad .wrapper .reset {
+  grid-column: span 2;
+}
+
+.numberpad .wrapper .equals {
+  background-color: var(--key-bg-red);
+  -webkit-box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-red);
+          box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-red);
+  grid-column: span 2;
+}
+
+.numberpad .wrapper .equals:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  -webkit-box-shadow: 0px 5px 0px -3px var(--key-bg-shadow-red);
+          box-shadow: 0px 5px 0px -3px var(--key-bg-shadow-red);
+}

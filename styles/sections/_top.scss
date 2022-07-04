@@ -1,0 +1,89 @@
+.top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 10px;
+
+    h3 {
+        font-size: .8em;
+        color: var(--text-white);
+
+        @media (max-width: 400px) {
+            font-size: 1em;
+        }
+    }
+
+    .theme-selector {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 15px;
+
+        h5 {
+            color: var(--text-white);
+            font-size: .25em;
+            margin-bottom: .5em;
+
+            @media (max-width: 400px) {
+                font-size: .4em;
+            }
+        }
+
+        .theme-selector-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--main-bg-alt);
+            padding: .5px;
+            border-radius: 15px;
+
+            .option-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 3px;
+                cursor: pointer;
+                border-radius: 50%;
+                width: 10px;
+                height: 10px;
+                position: relative;
+
+                @media (max-width: 400px) {
+                    width: 18px;
+                    height: 18px;
+                }
+
+                .label {
+                    font-size: .3em;
+                    color: var(--text-white);
+                    position: absolute;
+                    top: -15px;
+
+                    @media (max-width: 400px) {
+                        font-size: .4em;
+                        top: -20px;
+                    }
+                }
+
+                input {
+                    display: none;
+                }
+
+                input:checked + .checkmark {
+                    opacity: 1;
+                }
+
+                .checkmark {
+                    opacity: 0;
+                    width: 95%;
+                    height: 95%;
+                    border-radius: 50%;
+                    background: var(--key-bg-red);
+                    transition: all .5s ease;
+                }
+
+
+            }
+        }
+    }
+}

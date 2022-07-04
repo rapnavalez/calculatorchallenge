@@ -1,0 +1,25 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--main-bg);
+
+    main {
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+
+        @media (max-width: 400px) {
+            width: 300px;
+        }
+
+        .top,
+        .screen,
+        .numberpad {
+            width: 100%;
+        }
+    }
+}

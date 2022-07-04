@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="theme1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="stylesheet" href="./styles.css">
   <title>Frontend Mentor | Calculator app</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -16,11 +16,74 @@
 </head>
 <body>
 
+  <div class="container">
+
+    <main>
+      <section class="top">
+        <h3>calc</h3>
+        <div class="theme-selector">
+          <h5>THEME</h5>
+          <div class="theme-selector-wrapper">
+            <label class="option-wrapper">
+              <span class="label">1</span>
+              <input type="radio" id="theme-1" name="theme-option" value="theme-1" checked>
+              <span class="checkmark"></span>
+            </label>
+
+            <label class="option-wrapper">
+              <span class="label">2</span>
+              <input type="radio" id="theme-2" name="theme-option" value="theme-3">
+              <span class="checkmark"></span>
+            </label>
+
+            <label class="option-wrapper">
+              <span class="label">3</span>
+              <input type="radio" id="theme-3" name="theme-option" value="theme-3">
+              <span class="checkmark"></span>
+            </label>
+
+          </div>
+
+        </div>
+      </section>
+      <section class="screen">
+        <span class="firstInput"></span>
+        <input type="text" value="0" class="screen--input" pattern="[0-9]+([\.,][0-9]+)?" step="0.01">
+      </section>
+      <section class="numberpad">
+        <div class="wrapper">
+          <button class="numberpad--btn number number7">7</button>
+          <button class="numberpad--btn number number8">8</button>
+          <button class="numberpad--btn number number9">9</button>
+          <button class="numberpad--btn del">DEL</button>
+          <button class="numberpad--btn number number4">4</button>
+          <button class="numberpad--btn number number5">5</button>
+          <button class="numberpad--btn number number6">6</button>
+          <button class="numberpad--btn operator add" disabled>+</button>
+          <button class="numberpad--btn number number1">1</button>
+          <button class="numberpad--btn number number2">2</button>
+          <button class="numberpad--btn number number3">3</button>
+          <button class="numberpad--btn operator subtract" disabled>-</button>
+          <button class="numberpad--btn period">.</button>
+          <button class="numberpad--btn number number0">0</button>
+          <button class="numberpad--btn operator divide" disabled>/</button>
+          <button class="numberpad--btn operator multiply" disabled>*</button>
+          <button class="numberpad--btn reset">RESET</button>
+          <button class="numberpad--btn operator equals">=</button>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+
 
   
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a href="#">Rap Navalez</a>.
   </div>
+
+  <script src="./app.js"></script>
 </body>
 </html>
