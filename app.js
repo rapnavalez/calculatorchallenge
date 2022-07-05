@@ -1,117 +1,101 @@
 const screen = document.querySelector(".screen--input");
-const firstInput = document.querySelector(".firstInput");
 const btns = document.querySelectorAll(".numberpad--btn")
 const btnNumber = document.querySelectorAll(".number")
 const btnOperators = document.querySelectorAll(".operator")
 
 
+
+
 const nums = ["1","2","3","4","5","6","7","8","9","0"]
-const operators = ["/", "*", "+", "-"] 
-let numArray = []
+const operators = ["/", "*", "+", "-"]
+let prevEntry
 let num1
 let num2
 let operator
-let equals
+let justSolved = false
+btns.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        //get the value of the btn
+        const value = e.target.value
 
-
-
-
-const getNum1 = () => {
-    btns.forEach(btn => {
-        btn.addEventListener("click", (e)=> {
-            let val = e.target.innerHTML
-
-            if(nums.includes(val)) {
-
-                if (numArray.length === 0 && val == 0) {
-                    console.log("cannot push");
+        //check if the value is a number
+        if(nums.includes(value)) {
+            //check if the current screen value is 0
+            if(screen.value === "0") {
+                //remove the 0 if the current screen value is 0
+                screen.value = ""
+                screen.value += value
+            } else {
+                if(justSolved) {
+                    screen.value = ""
+                    screen.value += value
+                    justSolved = false
                 } else {
-                    if(operator == undefined) {
-                        numArray.push(val)
-                        num1 = numArray.join("")
-                        screen.value = parseInt(num1).toLocaleString()
-                    
-                        if(val != 0) {
-                            btnOperators.forEach(btn => {
-                            btn.disabled = false
-                            }) 
-                        }
-                    } else {
-                        numArray.push(val)
-                        num2 = numArray.join("")
-                        screen.value = parseInt(num2).toLocaleString()
-
-                    }
-                }
-
-
-
-            } else if(operators.includes(val)) {
-
-                if(firstInput.innerHTML) {
-                    operator = val
-
-                    if(firstInput.innerHTML && parseInt(screen.value) > 0) {
-                        firstInput.innerHTML = getResult(parseInt(firstInput.innerHTML),parseInt(screen.value), operator)
-                        screen.value = operator
-                        numArray = []
-                    } else {
-                        screen.value = operator
-                        numArray = []
-                    }
-                } else {
-                    operator = val
-                    num1 = numArray.join("")
-                    firstInput.innerHTML = num1
-                    screen.value = operator
-                    numArray = []
-                }
-
-            } else if(val === "=") {
-                null
-            } else if(val === "RESET") {
-                num1 = num2 = operator = ""
-                numArray = []
-                screen.value = 0
-                firstInput.innerHTML = ""
-                btnOperators.forEach(btn => {
-                    btn.disabled = true
-                }) 
-            } else if(val === "DEL") {
-                if(screen.value != operator) {
-                    numArray.pop()
-                    console.log(num1);
-                    if(numArray.length !== 0) {
-                        num1 = numArray.join("")
-                        screen.value = parseInt(num1).toLocaleString()
-                    } else {
-                        screen.value = 0  
-                        btnOperators.forEach(btn => {
-                            btn.disabled = true
-                        })        
-                    }
-                } else {
-                    firstInput.innerHTML = ""
-                    screen.value = parseInt(num1).toLocaleString()
+                    screen.value += value
                 }
             }
+        
+        } else if(value === "." && !screen.value.includes(".")) {
+            screen.value += value
+        //check if the value is an operator
+        } else if(operators.includes(value)) {
+            //check if there was already a number before an operator is selected
+            if(screen.value === "0") {
+                alert("enter a number first")
+            } else {
+                prevEntry = screen.value.charAt(screen.value.length-1);
+                //change to the operator if the previous entry was an operator
+                if(operators.includes(prevEntry)) {
+                    let screen2 = screen.value.slice(0, -1)
+                    screen.value = screen2
+                    screen.value += value
+                    operator = value   
+                } else {
+                    //resolve the operation if there's already an operator in the screen
+                    if(screen.value.includes("/") || screen.value.includes("*") || screen.value.includes("-") || screen.value.includes("+")) {
+                        // screen.value = getResult(num1, num2, operator)
+                        // screen.value += value
+                        null
+                    } else {
+                        screen.value += value
+                        operator = value
+                    }
 
-        })
+                }
+            }
+        //reset the screen value
+        } else if(value === "RESET") {
+            screen.value = "0"
+        //delete the last character on the screen
+        } else if(value === "DEL") {
+            if(screen.value !== "0") { 
+                let screen2 = screen.value.slice(0, -1)
+                if (screen.value.length <= 1) {
+                    screen.value = "0"
+                } else {
+                    screen.value = screen2
+                }
+            }
+        //solved the operation
+        } else if(value === "=" && justSolved === false) {
+            num1 = screen.value.substr(0, screen.value.indexOf(operator))
+            num2 = screen.value.substr(screen.value.indexOf(operator)+1)
+            if (num1 && num2) {
+                screen.value = getResult(num1, num2, operator)
+                justSolved = true
+            } else {
+                num1 = ""
+                num2 = ""
+            }
+        }
     })
-}
+})
 
-getNum1()
 
-const getNum2 = () => {
-
-}
-
-const getOperator = () => {
-
-}
-
+let equals
 const getResult = (num1, num2, operator) => {
-
+    num1 = parseFloat(num1)
+    num2 = parseFloat(num2)
     switch(operator) {
         case "/":
             equals = num1 / num2;
