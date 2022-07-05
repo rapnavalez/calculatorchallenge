@@ -2,14 +2,14 @@ html[data-theme='theme1'] {
   --main-bg: hsl(222, 26%, 31%);
   --main-bg-alt: hsl(223, 31%, 20%);
   --screen-bg: hsl(224, 36%, 15%);
-  --key-bg-blue: hsl(225, 21%, 49%);
-  --key-bg-shadow-blue:hsl(224, 28%, 35%);
+  --key-bg-blue: hsl(224, 21%, 50%);
+  --key-bg-shadow-blue:hsl(224, 51%, 76%);
   --key-bg-red: hsl(6, 63%, 50%);
   --key-bg-shadow-red: hsl(6, 70%, 34%);
   --key-bg-orange: hsl(30, 25%, 89%);
   --key-bg-shadow-orange: hsl(28, 16%, 65%);
-  --text-white: #FFF;
-  --text-blue: hsl(221, 14%, 31%);
+  --text-white: hsl(40, 60%, 99%);
+  --text-blue: hsl(222, 13%, 31%);
 }
 
 html[data-theme='theme2'] {
@@ -23,7 +23,7 @@ html[data-theme='theme2'] {
   --key-bg-orange: hsl(45, 7%, 89%);
   --key-bg-shadow-orange: hsl(35, 11%, 61%);
   --text-blue: hsl(60, 10%, 19%);
-  --text-white: #FFF;
+  --text-white: hsl(40, 60%, 99%);
 }
 
 html[data-theme='theme3'] {
@@ -37,7 +37,7 @@ html[data-theme='theme3'] {
   --key-bg-orange: hsl(268, 47%, 21%);
   --key-bg-shadow-orange: hsl(290, 70%, 36%);
   --text-blue: hsl(198, 20%, 13%);
-  --text-white: #FFF;
+  --text-white: hsl(40, 60%, 99%);
   --text-yellow: hsl(52, 100%, 62%);
 }
 
@@ -232,34 +232,35 @@ body {
   }
 }
 
-.screen .firstInput {
+.screen--prevInput {
   position: absolute;
-  top: 7px;
+  top: 10px;
   right: 20px;
   font-size: .5em;
-  font-weight: normal;
+  opacity: .8;
   color: var(--text-white);
 }
 
-.screen--input {
+.screen--display {
   width: 100%;
   height: 100%;
-  font-size: 2.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  font-size: 2.4rem;
   font-weight: 700;
   color: var(--text-white);
   background: none;
-  border: none;
-  outline: none;
-  text-align: end;
-  -webkit-appearance: none;
-          appearance: none;
-  -moz-appearance: textfield;
-}
-
-.screen input::-webkit-outer-spin-button,
-.screen input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+  overflow: hidden;
+  padding-top: 10px;
+  -webkit-transition: all .2s;
+  transition: all .2s;
 }
 
 .numberpad {
@@ -269,17 +270,6 @@ body {
   margin-top: 20px;
   border-radius: 8px;
   padding: 20px;
-}
-
-@media (max-width: 400px) {
-  .numberpad {
-    height: 400px;
-  }
-}
-
-.numberpad .wrapper {
-  height: 100%;
-  width: 100%;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (70px)[4];
@@ -288,13 +278,19 @@ body {
 }
 
 @media (max-width: 400px) {
-  .numberpad .wrapper {
+  .numberpad {
     -ms-grid-columns: (58px)[4];
         grid-template-columns: repeat(4, 58px);
   }
 }
 
-.numberpad .wrapper .numberpad--btn {
+@media (max-width: 400px) {
+  .numberpad {
+    height: 400px;
+  }
+}
+
+.numberpad--btn {
   background-color: var(--key-bg-orange);
   border: none;
   border-radius: 5px;
@@ -307,23 +303,23 @@ body {
 }
 
 @media (max-width: 400px) {
-  .numberpad .wrapper .numberpad--btn {
+  .numberpad--btn {
     font-size: 1.1em;
   }
 }
 
-.numberpad .wrapper .numberpad--btn:active {
+.numberpad--btn:active {
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
   -webkit-box-shadow: 0px 5px 0px -3px var(--key-bg-shadow-orange);
           box-shadow: 0px 5px 0px -3px var(--key-bg-shadow-orange);
 }
 
-.numberpad .wrapper .numberpad--btn:disabled {
+.numberpad--btn:disabled {
   background-color: red;
 }
 
-.numberpad .wrapper .del, .numberpad .wrapper .reset, .numberpad .wrapper .equals {
+.numberpad .del, .numberpad .reset, .numberpad .equals {
   font-size: .6em;
   color: var(--text-white);
   background-color: var(--key-bg-blue);
@@ -331,25 +327,25 @@ body {
           box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-blue);
 }
 
-.numberpad .wrapper .del:active, .numberpad .wrapper .reset:active, .numberpad .wrapper .equals:active {
+.numberpad .del:active, .numberpad .reset:active, .numberpad .equals:active {
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
   -webkit-box-shadow: 0px 5px 0px -3px var(--key-bg-shadow-blue);
           box-shadow: 0px 5px 0px -3px var(--key-bg-shadow-blue);
 }
 
-.numberpad .wrapper .reset {
+.numberpad .reset {
   grid-column: span 2;
 }
 
-.numberpad .wrapper .equals {
+.numberpad .equals {
   background-color: var(--key-bg-red);
   -webkit-box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-red);
           box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-red);
   grid-column: span 2;
 }
 
-.numberpad .wrapper .equals:active {
+.numberpad .equals:active {
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
   -webkit-box-shadow: 0px 5px 0px -3px var(--key-bg-shadow-red);

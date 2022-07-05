@@ -1,116 +1,164 @@
-const screen = document.querySelector(".screen--input");
-const btns = document.querySelectorAll(".numberpad--btn")
-const btnNumber = document.querySelectorAll(".number")
-const btnOperators = document.querySelectorAll(".operator")
+const allBtns = document.querySelectorAll(".numberpad--btn")
+const numberBtns = document.querySelectorAll(".number")
+const operatorBtns = document.querySelectorAll(".operator")
+const delBtn = document.querySelector(".del")
+const resetBtn = document.querySelector(".reset")
+const equalsBtn = document.querySelector(".equals")
+const display = document.querySelector(".screen--display")
+const prevInput = document.querySelector(".screen--prevInput")
 
 
+class Calculator {
+    constructor(screenDisplay, prevInput) {
+        this.screenDisplay = screenDisplay
+        this.prevInput = prevInput
+        this.reset()
+    }
 
+    reset() {
+        this.prevInput.innerText = ""
+        this.screenDisplay.innerText = "0"
+        this.screenDisplay.style.fontSize = "2.4rem"
+        this.currentAction = ""
+        this.prevAction = ""
+        this.operator = undefined
+    }
 
-const nums = ["1","2","3","4","5","6","7","8","9","0"]
-const operators = ["/", "*", "+", "-"]
-let prevEntry
-let num1
-let num2
-let operator
-let justSolved = false
-btns.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-        //get the value of the btn
-        const value = e.target.value
+    delete() {
+        this.currentAction = this.currentAction.toString().slice(0, -1)
+    }
 
-        //check if the value is a number
-        if(nums.includes(value)) {
-            //check if the current screen value is 0
-            if(screen.value === "0") {
-                //remove the 0 if the current screen value is 0
-                screen.value = ""
-                screen.value += value
-            } else {
-                if(justSolved) {
-                    screen.value = ""
-                    screen.value += value
-                    justSolved = false
-                } else {
-                    screen.value += value
-                }
-            }
-        
-        } else if(value === "." && !screen.value.includes(".")) {
-            screen.value += value
-        //check if the value is an operator
-        } else if(operators.includes(value)) {
-            //check if there was already a number before an operator is selected
-            if(screen.value === "0") {
-                alert("enter a number first")
-            } else {
-                prevEntry = screen.value.charAt(screen.value.length-1);
-                //change to the operator if the previous entry was an operator
-                if(operators.includes(prevEntry)) {
-                    let screen2 = screen.value.slice(0, -1)
-                    screen.value = screen2
-                    screen.value += value
-                    operator = value   
-                } else {
-                    //resolve the operation if there's already an operator in the screen
-                    if(screen.value.includes("/") || screen.value.includes("*") || screen.value.includes("-") || screen.value.includes("+")) {
-                        // screen.value = getResult(num1, num2, operator)
-                        // screen.value += value
-                        null
-                    } else {
-                        screen.value += value
-                        operator = value
-                    }
+    appendNumber(number) {
+        if (number === "." && this.currentAction.includes(".")) return
+        if (this.screenDisplay.innerText.length > 15) return
+        this.currentAction = this.currentAction.toString() + number.toString()
+    }
 
-                }
-            }
-        //reset the screen value
-        } else if(value === "RESET") {
-            screen.value = "0"
-        //delete the last character on the screen
-        } else if(value === "DEL") {
-            if(screen.value !== "0") { 
-                let screen2 = screen.value.slice(0, -1)
-                if (screen.value.length <= 1) {
-                    screen.value = "0"
-                } else {
-                    screen.value = screen2
-                }
-            }
-        //solved the operation
-        } else if(value === "=" && justSolved === false) {
-            num1 = screen.value.substr(0, screen.value.indexOf(operator))
-            num2 = screen.value.substr(screen.value.indexOf(operator)+1)
-            if (num1 && num2) {
-                screen.value = getResult(num1, num2, operator)
-                justSolved = true
-            } else {
-                num1 = ""
-                num2 = ""
-            }
+    selectOperator(operator) {
+        if (this.currentAction === "") return
+        if (this.currentAction !== "") {
+            this.compute()
         }
+        this.operator = operator
+        this.prevAction = this.currentAction
+        this.currentAction = ""
+    }
+
+    displayPrevAction () {
+        if(this.screenDisplay.innerText === "") {
+            this.screenDisplay.innerText = this.prevAction
+        }
+    }
+    
+    compute() {
+        let result
+        if(isNaN(parseFloat(this.prevAction)) || isNaN(parseFloat(this.currentAction))) return
+        switch(this.operator) {
+            case "+":
+                result = parseFloat(this.prevInput.innerText) + parseFloat(this.currentAction)
+                break;
+            case "-":
+                result = parseFloat(this.prevInput.innerText) - parseFloat(this.currentAction)
+                break;
+            case "×":
+                result = parseFloat(this.prevInput.innerText) * parseFloat(this.currentAction)
+                break;
+            case "÷":
+                result = parseFloat(this.prevInput.innerText) / parseFloat(this.currentAction)
+                break;
+            default:
+                break;
+        }
+        this.currentAction = result
+        this.prevAction = ""
+        this.operator = undefined
+    }
+
+    modifyDisplay(display) {
+        //to be updated later
+        return display
+    }
+
+
+    ifScreenIsEmpty() {
+        if(this.screenDisplay.innerText === "") {
+            this.screenDisplay.innerText = 0
+        }
+    }
+
+    updateDisplay() {
+        this.screenDisplay.innerText = this.currentAction
+        if (this.screenDisplay.innerText.length > 11) {
+            this.screenDisplay.style.fontSize = ".6em"
+        } else {
+            this.screenDisplay.style.fontSize = "2.4rem"
+        }
+        if (this.operator) {
+            this.prevInput.innerText = `${this.modifyDisplay(this.prevAction)} ${this.operator}`
+        }
+        
+    }
+
+}
+
+const calculator = new Calculator(display, prevInput)
+
+numberBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        calculator.appendNumber(btn.innerText)
+        calculator.updateDisplay()
     })
 })
 
+operatorBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        calculator.selectOperator(btn.innerText)
+        calculator.compute()
+        calculator.updateDisplay()
+        calculator.displayPrevAction()
+    })
+})
 
-let equals
-const getResult = (num1, num2, operator) => {
-    num1 = parseFloat(num1)
-    num2 = parseFloat(num2)
-    switch(operator) {
-        case "/":
-            equals = num1 / num2;
-            break;
-        case "*":
-            equals = num1 * num2;
-            break;
-        case "+":
-            equals = num1 + num2;
-            break;
-        case "-":
-            equals = num1 - num2;
-        default:
-            break;
-    }
+equalsBtn.addEventListener("click", () => {
+    calculator.compute()
+    calculator.updateDisplay()
+})
 
-    return equals
-}
+resetBtn.addEventListener("click", () => {
+    calculator.reset()
+})
+
+delBtn.addEventListener("click", () => {
+    calculator.delete()
+    calculator.updateDisplay()
+    calculator.ifScreenIsEmpty()
+})
+
+
+
+
+
+// ******************THEME RELATED CODES************************
+
+const radioBtn = document.querySelectorAll('[name="theme-option"]')
+const html = document.querySelector("html")
+
+radioBtn.forEach(btn => {
+    btn.addEventListener("click", e => {
+        e.target.checked = true
+
+        switch(e.target.id){
+            case "theme-1":
+                html.setAttribute("data-theme", "theme1")
+                break;
+            case "theme-2":
+                html.setAttribute("data-theme", "theme2")
+                break;
+            case "theme-3":
+                html.setAttribute("data-theme", "theme3")
+                break;
+            default:
+                break;
+        }
+    })
+})
