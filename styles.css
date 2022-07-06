@@ -107,13 +107,13 @@ body {
   padding-bottom: 10px;
 }
 
-.top h4 {
+.top h1 {
   font-size: .8em;
   color: var(--text-white);
 }
 
 @media (max-width: 400px) {
-  .top h4 {
+  .top h1 {
     font-size: 1em;
   }
 }
@@ -131,14 +131,14 @@ body {
   gap: 15px;
 }
 
-.top .theme-selector h5 {
+.top .theme-selector h2 {
   color: var(--text-white);
   font-size: .25em;
   margin-bottom: .5em;
 }
 
 @media (max-width: 400px) {
-  .top .theme-selector h5 {
+  .top .theme-selector h2 {
     font-size: .4em;
   }
 }
