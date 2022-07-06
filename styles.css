@@ -107,13 +107,13 @@ body {
   padding-bottom: 10px;
 }
 
-.top h3 {
+.top h4 {
   font-size: .8em;
   color: var(--text-white);
 }
 
 @media (max-width: 400px) {
-  .top h3 {
+  .top h4 {
     font-size: 1em;
   }
 }
