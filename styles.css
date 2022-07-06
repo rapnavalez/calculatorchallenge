@@ -1,4 +1,4 @@
-html[data-theme='theme1'] {
+html[data-theme='theme-1'] {
   --main-bg: hsl(222, 26%, 31%);
   --main-bg-alt: hsl(223, 31%, 20%);
   --screen-bg: hsl(224, 36%, 15%);
@@ -12,21 +12,21 @@ html[data-theme='theme1'] {
   --text-blue: hsl(222, 13%, 31%);
 }
 
-html[data-theme='theme2'] {
+html[data-theme='theme-2'] {
   --main-bg: hsl(0, 0%, 90%);
   --main-bg-alt: hsl(0, 5%, 81%);
   --screen-bg: hsl(0, 0%, 93%);
-  --key-bg-blue: hsl(185, 42%, 37%);
+  --key-bg-blue:hsl(185, 42%, 37%);
   --key-bg-shadow-blue: hsl(185, 58%, 25%);
   --key-bg-red: hsl(25, 98%, 40%);
   --key-bg-shadow-red: hsl(25, 99%, 27%);
   --key-bg-orange: hsl(45, 7%, 89%);
   --key-bg-shadow-orange: hsl(35, 11%, 61%);
   --text-blue: hsl(60, 10%, 19%);
-  --text-white: hsl(40, 60%, 99%);
+  --text-white: hsl(0, 0, 100%);
 }
 
-html[data-theme='theme3'] {
+html[data-theme='theme-3'] {
   --main-bg: hsl(268, 75%, 9%);
   --main-bg-alt: hsl(268, 71%, 12%);
   --screen-bg: hsl(268, 71%, 12%);
@@ -36,9 +36,8 @@ html[data-theme='theme3'] {
   --key-bg-shadow-red: hsl(177, 92%, 70%);
   --key-bg-orange: hsl(268, 47%, 21%);
   --key-bg-shadow-orange: hsl(290, 70%, 36%);
-  --text-blue: hsl(198, 20%, 13%);
+  --text-blue: hsl(52, 100%, 62%);
   --text-white: hsl(40, 60%, 99%);
-  --text-yellow: hsl(52, 100%, 62%);
 }
 
 * {
@@ -321,7 +320,7 @@ body {
 
 .numberpad .del, .numberpad .reset, .numberpad .equals {
   font-size: .6em;
-  color: var(--text-white);
+  color: var(--key-bg-orange);
   background-color: var(--key-bg-blue);
   -webkit-box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-blue);
           box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-blue);

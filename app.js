@@ -143,19 +143,33 @@ delBtn.addEventListener("click", () => {
 const radioBtn = document.querySelectorAll('[name="theme-option"]')
 const html = document.querySelector("html")
 
-radioBtn.forEach(btn => {
-    btn.addEventListener("click", e => {
-        e.target.checked = true
+let theme
+let btn
+window.onload = () => {
+    theme = localStorage.getItem("theme") || "theme=1"
+    html.setAttribute("data-theme", theme)
+    btn = document.querySelector(`#${theme}`)
+    btn.checked = true
+}
 
+const saveTheme = (selected) => {
+    localStorage.setItem("theme", selected)
+}
+
+radioBtn.forEach(btn => {
+
+    btn.addEventListener("click", e => {
+        e.target.id
+        saveTheme(e.target.id)
         switch(e.target.id){
             case "theme-1":
-                html.setAttribute("data-theme", "theme1")
+                html.setAttribute("data-theme", "theme-1")
                 break;
             case "theme-2":
-                html.setAttribute("data-theme", "theme2")
+                html.setAttribute("data-theme", "theme-2")
                 break;
             case "theme-3":
-                html.setAttribute("data-theme", "theme3")
+                html.setAttribute("data-theme", "theme-3")
                 break;
             default:
                 break;

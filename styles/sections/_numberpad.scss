@@ -28,6 +28,10 @@
         color: var(--text-blue);
         cursor: pointer;
 
+        &:hover {
+            // background: 
+        }
+
         @media (max-width: 400px) {
             font-size: 1.1em;
         }
@@ -44,7 +48,7 @@
 
     .del, .reset, .equals {
         font-size: .6em;
-        color: var(--text-white);
+        color: var(--key-bg-orange);
         background-color: var(--key-bg-blue);
         box-shadow: 0px 6px 0px -3px var(--key-bg-shadow-blue);
 
