@@ -146,7 +146,7 @@ const html = document.querySelector("html")
 let theme
 let btn
 window.onload = () => {
-    theme = localStorage.getItem("theme") || "theme=1"
+    theme = localStorage.getItem("theme") || "theme-1"
     html.setAttribute("data-theme", theme)
     btn = document.querySelector(`#${theme}`)
     btn.checked = true
